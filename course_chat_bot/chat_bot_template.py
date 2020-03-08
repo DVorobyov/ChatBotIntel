@@ -59,7 +59,7 @@ def chat_history(update: Update, context: CallbackContext):
     message=''
 
     """File with the name of user"""
-    fopen=open(f"log_{update.effective_user.first_name}.txt","w+")
+    fopen=open(f"log_{update.effective_user.first_name}.txt","w+", encoding="utf-8")
 
     for i in range(len(log)):
         stack_log.append(log[len(log)-1-i])
@@ -76,6 +76,7 @@ def chat_history(update: Update, context: CallbackContext):
             break
 
     update.message.reply_text(f"History:\n{message}")
+    fopen.close()
 
 
 @log_f

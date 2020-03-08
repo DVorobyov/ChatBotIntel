@@ -1,3 +1,1 @@
-{'username': 'Дмитрий Воробьев', 'funcname': 'echo', 'message': 'vbnm,', 'date': '2020-03-09 02:10:02.410046'}
-{'username': 'Дмитрий Воробьев', 'funcname': 'echo', 'message': 'hgjk', 'date': '2020-03-09 02:10:01.194809'}
-{'username': 'Дмитрий Воробьев', 'funcname': 'echo', 'message': 'bnm', 'date': '2020-03-09 02:10:00.035622'}
+{'username': 'Р”РјРёС‚СЂРёР№ Р’РѕСЂРѕР±СЊРµРІ', 'funcname': 'echo', 'message': 'xcvbncvb', 'date': '2020-03-09 02:19:59.335129'}
