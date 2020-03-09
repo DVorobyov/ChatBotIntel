@@ -8,7 +8,6 @@ from setup import PROXY, TOKEN
 from telegram import Bot, Update
 from telegram.ext import CallbackContext, CommandHandler, Filters, MessageHandler, Updater
 
-
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -24,14 +23,19 @@ def log_f(func):
     def inner(*args, **kwargs):
         """For showing time"""
         now = datetime.datetime.now()
+        log_open = open("bot_log.txt", "w", encoding="utf-8")
         func(*args,**kwargs)
         info = dict()
         info["username"]=args[0].effective_user.first_name + " " + args[0].effective_user.last_name
+        info["nickname"]=args[0].effective_user.username
         info["funcname"]=func.__name__
         info["message"]=args[0].message.text
         info["date"]=str(now)
         global log
         log.append(info)
+        for i in range(len(log)):
+            print(log[i], file=log_open)
+        log_open.close()
     return inner
 
 @log_f
@@ -63,7 +67,7 @@ def chat_history(update: Update, context: CallbackContext):
 
     """searching last 5 or less messages for this user, logging to the file and forming the answer"""
     for i in range(len(log)):
-        if (log[len(log)-1-i]['username'] == (update.effective_user.first_name + " " + update.effective_user.last_name)):
+        if (log[len(log)-1-i]['nickname'] == update.effective_user.username):
             print(log[len(log)-1-i],file=fopen)
             message=log[len(log)-1-i]["message"] + "\n" + message
             counter += 1
