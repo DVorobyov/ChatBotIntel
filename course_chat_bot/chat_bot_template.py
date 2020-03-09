@@ -53,24 +53,19 @@ def echo(update: Update, context: CallbackContext):
 @log_f
 def chat_history(update: Update, context: CallbackContext):
     """Echo the user history."""
-    """Making stack from messages for searching from the end"""
-    stack_log=[]
     """message is the answer for a user"""
     message=''
 
     """File with the name of user"""
     fopen=open(f"log_{update.effective_user.first_name}.txt","w+", encoding="utf-8")
 
-    for i in range(len(log)):
-        stack_log.append(log[len(log)-1-i])
-
     counter=0
 
     """searching last 5 or less messages for this user, logging to the file and forming the answer"""
-    for i in range(len(stack_log)):
-        if (stack_log[i]['username'] == (update.effective_user.first_name + " " + update.effective_user.last_name)):
-            print(stack_log[i],file=fopen)
-            message=stack_log[i]["message"] + "\n" + message
+    for i in range(len(log)):
+        if (log[len(log)-1-i]['username'] == (update.effective_user.first_name + " " + update.effective_user.last_name)):
+            print(log[len(log)-1-i],file=fopen)
+            message=log[len(log)-1-i]["message"] + "\n" + message
             counter += 1
         if counter == 5:
             break
