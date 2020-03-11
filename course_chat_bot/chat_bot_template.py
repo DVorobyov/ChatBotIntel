@@ -23,7 +23,6 @@ def log_f(func):
     def inner(*args, **kwargs):
         """For showing time"""
         now = datetime.datetime.now()
-        log_open = open("bot_log.txt", "w", encoding="utf-8")
         func(*args,**kwargs)
         info = dict()
         info["username"]=args[0].effective_user.first_name + " " + args[0].effective_user.last_name
@@ -33,9 +32,9 @@ def log_f(func):
         info["date"]=str(now)
         global log
         log.append(info)
-        for i in range(len(log)):
-            print(log[i], file=log_open)
-        log_open.close()
+        with open("bot_log.txt", "w", encoding="utf-8") as log_open:
+            for i in range(len(log)):
+                print(log[i], file=log_open)
     return inner
 
 @log_f
@@ -61,21 +60,19 @@ def chat_history(update: Update, context: CallbackContext):
     message=''
 
     """File with the name of user"""
-    fopen=open(f"log_{update.effective_user.first_name}.txt","w+", encoding="utf-8")
+    with open(f"log_{update.effective_user.first_name}.txt","w", encoding="utf-8") as fopen:
+        counter=0
 
-    counter=0
+        """searching last 5 or less messages for this user, logging to the file and forming the answer"""
+        for i in range(len(log)):
+            if (log[len(log)-1-i]['nickname'] == update.effective_user.username):
+                print(log[len(log)-1-i],file=fopen)
+                message=log[len(log)-1-i]["message"] + "\n" + message
+                counter += 1
+            if counter == 5:
+                break
 
-    """searching last 5 or less messages for this user, logging to the file and forming the answer"""
-    for i in range(len(log)):
-        if (log[len(log)-1-i]['nickname'] == update.effective_user.username):
-            print(log[len(log)-1-i],file=fopen)
-            message=log[len(log)-1-i]["message"] + "\n" + message
-            counter += 1
-        if counter == 5:
-            break
-
-    update.message.reply_text(f"History:\n{message}")
-    fopen.close()
+        update.message.reply_text(f"History:\n{message}")
 
 
 @log_f
