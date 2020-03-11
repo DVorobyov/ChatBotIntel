@@ -1,7 +1,0 @@
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'echo', 'message': 'nbjbjb', 'date': '2020-03-09 15:34:48.567237'}
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'echo', 'message': 'jbjb n', 'date': '2020-03-09 15:34:48.949944'}
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'echo', 'message': 'jbhjbjbj', 'date': '2020-03-09 15:34:49.214782'}
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'echo', 'message': 'hhbjn', 'date': '2020-03-09 15:34:49.471123'}
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'echo', 'message': 'bjb', 'date': '2020-03-09 15:34:49.755198'}
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'echo', 'message': 'n', 'date': '2020-03-09 15:34:50.071527'}
-{'username': 'Дмитрий Воробьев', 'nickname': 'dimonstr00', 'funcname': 'chat_history', 'message': '/history', 'date': '2020-03-09 15:34:50.345668'}
