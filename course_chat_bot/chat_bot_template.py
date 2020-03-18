@@ -3,6 +3,7 @@
 
 import logging
 import datetime
+import requests
 
 from setup import PROXY, TOKEN
 from telegram import Bot, Update
@@ -25,14 +26,18 @@ def log_f(func):
         now = datetime.datetime.now()
         func(*args,**kwargs)
         info = dict()
-        info["username"]=args[0].effective_user.first_name + " " + args[0].effective_user.last_name
+        info["username"]=args[0].effective_user.first_name
+        try:
+            info["username"]+= " " + args[0].effective_user.last_name
+        except BaseException:
+            pass
         info["nickname"]=args[0].effective_user.username
         info["funcname"]=func.__name__
         info["message"]=args[0].message.text
         info["date"]=str(now)
         global log
         log.append(info)
-        with open("bot_log.txt", "w", encoding="utf-8") as log_open:
+        with open("bot_log.txt", "a", encoding="utf-8") as log_open:
             for i in range(len(log)):
                 print(log[i], file=log_open)
     return inner
@@ -58,9 +63,8 @@ def chat_history(update: Update, context: CallbackContext):
     """Echo the user history."""
     """message is the answer for a user"""
     message=''
-
     """File with the name of user"""
-    with open(f"log_{update.effective_user.first_name}.txt","w", encoding="utf-8") as fopen:
+    with open(f"log_{update.effective_user.first_name}.txt","a", encoding="utf-8") as fopen:
         counter=0
 
         """searching last 5 or less messages for this user, logging to the file and forming the answer"""
@@ -73,6 +77,17 @@ def chat_history(update: Update, context: CallbackContext):
                 break
 
         update.message.reply_text(f"History:\n{message}")
+
+@log_f
+def fact(update: Update, context: CallbackContext):
+    r = requests.get('https://cat-fact.herokuapp.com/facts')
+    d = r.json()
+    maxv = 0
+    for i in range(len(d['all'])):
+        if d['all'][i]['upvotes'] >= maxv:
+            maxv = d['all'][i]['upvotes']
+            fact = d['all'][i]['text']
+    update.message.reply_text(f"Fact: \n{fact}")
 
 
 @log_f
@@ -92,6 +107,7 @@ def main():
     updater.dispatcher.add_handler(CommandHandler('start', start))
     updater.dispatcher.add_handler(CommandHandler('help', chat_help))
     updater.dispatcher.add_handler(CommandHandler('history', chat_history))
+    updater.dispatcher.add_handler(CommandHandler('fact', fact))
 
     # on noncommand i.e message - echo the message on Telegram
     updater.dispatcher.add_handler(MessageHandler(Filters.text, echo))
