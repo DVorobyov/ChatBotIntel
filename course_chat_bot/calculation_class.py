@@ -2,8 +2,8 @@ import requests
 import pymongo
 import datetime
 from random import random
-from course_chat_bot.sources.Calc_src.Corona_src import CoronaBdWork
-from course_chat_bot.sources.Calc_src.Horoscope \
+from sources.Calc_src.Corona_src import CoronaBdWork
+from sources.Calc_src.Horoscope \
     import horo_message_parse, get_horoscope_str
 
 

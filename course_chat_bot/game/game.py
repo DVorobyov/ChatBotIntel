@@ -1,5 +1,5 @@
-from course_chat_bot.game.Board import Board
-from course_chat_bot.game.Renderer import Renderer
+from game.Board import Board
+from game.Renderer import Renderer
 import random
 
 

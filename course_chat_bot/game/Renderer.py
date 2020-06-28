@@ -1,4 +1,4 @@
-from course_chat_bot.game.Board import Board
+from game.Board import Board
 
 
 class Renderer:
