@@ -1,10 +1,10 @@
 import unittest
 from unittest import mock
-from course_chat_bot.calculation_class import Calculations
+from calculation_class import Calculations
 import requests
 import mongomock
 import pymongo
-from course_chat_bot.sources.Calc_src.Corona_src import CoronaBdWork
+from sources.Calc_src.Corona_src import CoronaBdWork
 
 
 class TestCalculationClass(unittest.TestCase):

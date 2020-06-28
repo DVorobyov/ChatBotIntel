@@ -1,4 +1,4 @@
-from course_chat_bot.sources.Calc_src.Corona_src import CoronaBdWork
+from sources.Calc_src.Corona_src import CoronaBdWork
 import unittest
 from unittest import mock
 import mongomock

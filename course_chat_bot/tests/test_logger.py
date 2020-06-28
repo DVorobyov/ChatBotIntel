@@ -1,6 +1,6 @@
 import unittest
 from unittest import mock
-from course_chat_bot.log_class import Logger
+from log_class import Logger
 import datetime
 import pymongo
 import mongomock

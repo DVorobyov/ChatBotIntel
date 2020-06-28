@@ -1,5 +1,5 @@
 import unittest
-from course_chat_bot.unit_test_homework.calculator_test_homework\
+from unit_test_homework.calculator_test_homework\
     import Calculator
 
 
